@@ -3,7 +3,7 @@ import api.core.impl.Student;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.*;
 
 
 /**
