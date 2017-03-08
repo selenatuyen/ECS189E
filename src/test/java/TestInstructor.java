@@ -49,15 +49,6 @@ public class TestInstructor {
     }
 
     @Test
-    public void testAddHomework5(){//Checks given a class if assigned instructor can add multiple homework of the same name, should fail
-        IAdmin admin = new Admin();
-        admin.createClass("Class", 2017, "Instructor", 15);
-        this.instructor.addHomework("Instructor", "Class", 2017, "Assignment", "Description");
-        this.instructor.addHomework("Instructor", "Class", 2017, "Assignment", "Description");
-        assertFalse(this.instructor.homeworkExists("Class", 2017, "Assignment"));
-    }
-
-    @Test
     public void testAssignGrade(){//Checks given an assigned instructor if can assign grade to enrolled student who submitted homework, should be not null
         IAdmin admin = new Admin();
         admin.createClass("Class", 2017, "Instructor", 15);
@@ -116,14 +107,4 @@ public class TestInstructor {
         assertNull(this.instructor.getGrade("Class", 2017, "Homework2", "Student"));
     }
 
-    @Test
-    public void testAssignGrade6(){//Checks given an assigned instructor if can assign grade to a not enrolled student who submits homework, should be null
-        IAdmin admin = new Admin();
-        admin.createClass("Class", 2017, "Instructor", 15);
-        IStudent student = new Student();
-        this.instructor.addHomework("Instructor", "Class", 2017, "Homework", "Description");
-        student.submitHomework("Student", "Homework", "Answer", "Class", 2017);
-        this.instructor.assignGrade("Instructor", "Class", 2017, "Homework", "Student", 80);
-        assertNull(this.instructor.getGrade("Class", 2017, "Homework", "Student"));
-    }
 }

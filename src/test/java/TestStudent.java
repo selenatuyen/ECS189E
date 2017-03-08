@@ -44,14 +44,6 @@ public class TestStudent {
         assertFalse(this.student.isRegisteredFor("Name4", "Class", 2017));
     }
 
-    @Test
-    public void testRegisterForClass4(){//Checks if student can register for class twice, should be false
-        IAdmin admin = new Admin();
-        admin.createClass("Class", 2017, "Instructor", 4);
-        this.student.registerForClass("Name", "Class", 2017);
-        this.student.registerForClass("Name", "Class", 2017);
-        assertFalse(this.student.isRegisteredFor("Name", "Class", 2017));
-    }
 
     @Test
     public void testDropClass(){//Check if registered student can drop class that has not ended, should be false
@@ -77,16 +69,6 @@ public class TestStudent {
         this.student.registerForClass("Name", "Class", 2017);
         this.student.dropClass("Name", "Class", 2016);
         assertFalse(this.student.isRegisteredFor("Name", "Class", 2016));
-    }
-
-    @Test
-    public void testDropClass4(){//Check if a registered student can drop a class twice, should be false
-        IAdmin admin = new Admin();
-        admin.createClass("Class", 2017, "Instructor", 4);
-        this.student.registerForClass("Name", "Class", 2017);
-        this.student.dropClass("Name", "Class", 2017);
-        this.student.dropClass("Name", "Class", 2017);
-        assertFalse(this.student.isRegisteredFor("Name", "Class", 2017));
     }
 
     @Test
@@ -127,6 +109,15 @@ public class TestStudent {
         IInstructor instructor = new Instructor();
         instructor.addHomework("Instructor", "Class", 2016, "Homework", "Description");
         this.student.submitHomework("Name", "Homework", "Answer", "Class", 2016);
+        assertFalse(this.student.hasSubmitted("Name", "Homework", "Class", 2017));
+    }
+
+    @Test
+    public void testSubmitHomework5(){//Checks if student can submit homework to class that doesn't exist, should be false
+        this.student.registerForClass("Name", "Class", 2017);
+        IInstructor instructor = new Instructor();
+        instructor.addHomework("Instructor", "Class", 2017, "Homework", "Description");
+        this.student.submitHomework("Name", "Homework", "Answer", "Class", 2017);
         assertFalse(this.student.hasSubmitted("Name", "Homework", "Class", 2017));
     }
 }
