@@ -130,7 +130,7 @@ public class TestAdmin {
     @Test
     public void testChangeCapacity5(){//Checks if can change capacity of a class that does not exist, should be null
         this.admin.changeCapacity("Test", 2017, 53);
-        assertNull(this.admin.getClassCapacity("Test", 2017));
+        assertEquals(-1, this.admin.getClassCapacity("Test", 2017));
     }
 
     @Test
